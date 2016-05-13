@@ -63,13 +63,14 @@ function create_second_strand_half($first_strand_half) {
 			array_push($results_array, 'A');
 		} elseif($letter === 'C') {
 			array_push($results_array, 'G');
-		} else {
+		} elseif($letter === 'G') {
 			array_push($results_array, 'C');
-		}
+		} 
 	}
 	$results = implode('', $results_array);
 	return $results;
 }
+
 function dna_generator_form_submit($form, &$form_state) {
 	$first_strand_half = $form_state['values']['dna_strand'];
 	$second_strand_half = create_second_strand_half($first_strand_half);

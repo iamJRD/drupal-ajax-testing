@@ -10,6 +10,7 @@ class DnaGeneratorTestCase extends DrupalUnitTestCase
 			'group' => 'Code Review',
 		);
 	}
+
 	function testDnaGenerator()
 	{
 	// UNIT TESTS
@@ -25,7 +26,7 @@ class DnaGeneratorTestCase extends DrupalUnitTestCase
 		// ENGLISH DESCRIPTION
 		$description = t('"AC" returns "TG".');
 		// ARRANGE
-		$input = "AC";
+		$input = "Av";
 		// ACT
 		$result = create_second_strand_half($input);
 		// ASSERT
@@ -39,5 +40,33 @@ class DnaGeneratorTestCase extends DrupalUnitTestCase
 		$result = create_second_strand_half($input);
 		// ASSERT
 		$this->assertTrue($result, $description);
+	}
+}
+
+class DnaGeneratorTests extends DrupalWebTestcase
+{
+	public static function getInfo()
+	{
+		return array(
+			'name' => 'DNA Generator Tests',
+			'description' => 'Tests for the DNA Generator module.',
+			'group' => 'Code Review',
+		);
+	}
+
+	public function setUp()
+	{
+		parent::setUp(array('dna_generator'));
+	}
+
+	public function testDnaGeneratorCreate()
+	{
+		// ARRANGE
+		$edit = array();
+		$edit['dna_strand'] = 'AACGTG';
+		// ACT
+		$this->drupalPost('/dna_generator', $edit, t('Complete that Double Helix!'));
+		// ASSERT
+		$this->assertText('TTGCAC', t('Right-o!'));
 	}
 }
