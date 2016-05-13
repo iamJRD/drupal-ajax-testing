@@ -51,8 +51,8 @@ function element_validate_input_strand($element) {
 	}
 }
 // FORM PROCESSING
-function dna_generator_form_submit($form, &$form_state) {
-	$upper_case_input_strand = strtoupper($form_state['values']['dna_strand']);
+function create_second_strand_half($first_strand_half) {
+	$upper_case_input_strand = strtoupper($first_strand_half);
 	$split_input_strand = str_split($upper_case_input_strand);
 	$results_array = array();
 
@@ -67,14 +67,19 @@ function dna_generator_form_submit($form, &$form_state) {
 			array_push($results_array, 'C');
 		}
 	}
-
 	$results = implode('', $results_array);
-	$_SESSION['original_strand'] = $upper_case_input_strand;
-	$_SESSION['dna_results'] = $results;
+	return $results;
+}
+function dna_generator_form_submit($form, &$form_state) {
+	$first_strand_half = $form_state['values']['dna_strand'];
+	$second_strand_half = create_second_strand_half($first_strand_half);
+	
+	$_SESSION['original_half'] = strtoupper($first_strand_half);
+	$_SESSION['result_half'] = $second_strand_half;
 	$form_state['redirect'] = 'dna_generator_results_page';
 }
 // RESULTS DISPLAY
 function dna_generator_results() {
-	return '<p>Half 1: ' . $_SESSION['original_strand'] . '</p>
-			<p>Half 2: ' . $_SESSION['dna_results'] . '</p>';
+	return '<p>Half 1: ' . $_SESSION['original_half'] . '</p>
+			<p>Half 2: ' . $_SESSION['result_half'] . '</p>';
 }
