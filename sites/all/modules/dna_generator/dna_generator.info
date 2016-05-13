@@ -1,0 +1,5 @@
+name = DNA Generator
+description = Completes the other side of a DNA strand from user input in a form.
+package = Code Review
+core = 7.x
+files[] = dna_generator.module
