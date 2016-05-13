@@ -59,7 +59,7 @@ class DnaGeneratorTests extends DrupalWebTestcase
 		parent::setUp(array('dna_generator'));
 	}
 
-	public function testDnaGeneratorCreate()
+	public function testDnaGeneratorCreateOne()
 	{
 		// ARRANGE
 		$edit = array();
@@ -68,5 +68,15 @@ class DnaGeneratorTests extends DrupalWebTestcase
 		$this->drupalPost('/dna_generator', $edit, t('Complete that Double Helix!'));
 		// ASSERT
 		$this->assertText('TTGCAC', t('Right-o!'));
+	}
+	public function testDnaGeneratorCreateTwo()
+	{
+		// ARRANGE
+		$edit = array();
+		$edit['dna_strand'] = 'TTTTT';
+		// ACT
+		$this->drupalPost('/dna_generator', $edit, t('Complete that Double Helix!'));
+		// ASSERT
+		$this->assertText('AAAAA', t('Right-o!'));
 	}
 }
