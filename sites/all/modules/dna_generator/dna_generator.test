@@ -12,10 +12,29 @@ class DnaGeneratorTestCase extends DrupalUnitTestCase
 	}
 	function testDnaGenerator()
 	{
+	// UNIT TESTS
 		// ENGLISH DESCRIPTION
 		$description = t('"A" returns "T".');
 		// ARRANGE
 		$input = "A";
+		// ACT
+		$result = create_second_strand_half($input);
+		// ASSERT
+		$this->assertTrue($result, $description);
+
+		// ENGLISH DESCRIPTION
+		$description = t('"AC" returns "TG".');
+		// ARRANGE
+		$input = "AC";
+		// ACT
+		$result = create_second_strand_half($input);
+		// ASSERT
+		$this->assertTrue($result, $description);
+
+		// ENGLISH DESCRIPTION
+		$description = t('"ACGT" returns "TGCA".');
+		// ARRANGE
+		$input = "acgt";
 		// ACT
 		$result = create_second_strand_half($input);
 		// ASSERT

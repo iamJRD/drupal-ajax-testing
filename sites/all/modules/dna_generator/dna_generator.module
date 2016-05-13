@@ -20,7 +20,7 @@ function dna_generator_menu() {
 function dna_generator_form() {
 	$form['dna_strand'] = array(
 		'#title' => t('Half of a Double Helix'),
-		'#description' => t('Please enter a string of the letters "A", "C", "G", or "T" to find the other half.'),
+		'#description' => t('Please enter a string of the letters "A", "C", "G", or "T" with no spaces to find the other half.'),
 		'#type' => 'textfield',
 		'#element_validate' => array('element_validate_input_strand'),
 		'#required' => TRUE,
@@ -40,7 +40,7 @@ function element_validate_input_strand($element) {
 
 	foreach($split_input_strand as $letter) {
 		if(!in_array($letter, $nucleotides)) {
-			form_error($element, t('I told you that it had to be a combination of the letters "A", "C", "G", and "T"!
+			form_error($element, t('I told you that it had to be a combination of the letters "A", "C", "G", and "T" with no spaces!
 				<br>
 				I\'m not afraid to yell at you again...
 				<br>
