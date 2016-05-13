@@ -1,0 +1,5 @@
+name = Article Ajax Display
+description = Displays the article content using ajax links.
+package = Code Review
+core = 7.x
+files[] = article_display.module
