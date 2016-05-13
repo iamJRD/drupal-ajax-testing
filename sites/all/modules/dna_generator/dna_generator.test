@@ -10,15 +10,15 @@ class DnaGeneratorTestCase extends DrupalUnitTestCase
 			'group' => 'Code Review',
 		);
 	}
-	// function testElementValidateInputStrand()
-	// {
-	// 	// ENGLISH DESCRIPTION
-	// 	$description = t('An letter other than "A", "C", "G", or "T" should return false.');
-	// 	// ARRANGE
-	// 	$input = "B";
-	// 	// ACT
-	// 	$result = element_validate_input_strand($input);
-	// 	// ASSERT
-	// 	$this->assertTrue($result, $description);
-	// }
+	function testDnaGenerator()
+	{
+		// ENGLISH DESCRIPTION
+		$description = t('"A" returns "T".');
+		// ARRANGE
+		$input = "A";
+		// ACT
+		$result = create_second_strand_half($input);
+		// ASSERT
+		$this->assertTrue($result, $description);
+	}
 }
