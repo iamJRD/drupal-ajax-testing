@@ -16,6 +16,7 @@ function dna_generator_form() {
 		'#title' => t('Half of a Double Helix'),
 		'#description' => t('Please enter a string of the letters "A", "C", "G", or "T" to find the other half.'),
 		'#type' => 'textfield',
+		'#element_validate' => array('element_validate_input_strand'),
 		'#required' => TRUE,
 	);
 	$form['submit'] = array(
@@ -23,4 +24,23 @@ function dna_generator_form() {
 		'#value' => 'Complete that Double Helix!',
 	);
 	return $form;
+}
+// VALIDATION
+function element_validate_input_strand($element) {
+	$upper_case_input_strand = strtoupper($element['#value']);
+	$split_input_strand = str_split($upper_case_input_strand);
+
+	$nucleotides = array('A', 'C', 'G', 'T');
+
+	foreach($split_input_strand as $letter) {
+		if(!in_array($letter, $nucleotides)) {
+			form_error($element, t('I told you that it had to be a combination of the letters "A", "C", "G", and "T"!
+				<br>
+				I\'m not afraid to yell at you again...
+				<br>
+				I\'m a computer. 
+				<br>
+				I have no feelings.'));
+		}
+	}
 }
