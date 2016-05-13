@@ -8,6 +8,12 @@ function dna_generator_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_NORMAL_ITEM,
 	);
+	$items['dna_generator_results_page'] = array(
+		'title' => t('DNA Results'),
+		'page callback' => 'dna_generator_results',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	return $items;
 }
 // FORM
@@ -43,4 +49,32 @@ function element_validate_input_strand($element) {
 				I have no feelings.'));
 		}
 	}
+}
+// FORM PROCESSING
+function dna_generator_form_submit($form, &$form_state) {
+	$upper_case_input_strand = strtoupper($form_state['values']['dna_strand']);
+	$split_input_strand = str_split($upper_case_input_strand);
+	$results_array = array();
+
+	foreach($split_input_strand as $letter) {
+		if($letter === 'A') {
+			array_push($results_array, 'T');
+		} elseif($letter === 'T') {
+			array_push($results_array, 'A');
+		} elseif($letter === 'C') {
+			array_push($results_array, 'G');
+		} else {
+			array_push($results_array, 'C');
+		}
+	}
+
+	$results = implode('', $results_array);
+	$_SESSION['original_strand'] = $upper_case_input_strand;
+	$_SESSION['dna_results'] = $results;
+	$form_state['redirect'] = 'dna_generator_results_page';
+}
+// RESULTS DISPLAY
+function dna_generator_results() {
+	return '<p>Half 1: ' . $_SESSION['original_strand'] . '</p>
+			<p>Half 2: ' . $_SESSION['dna_results'] . '</p>';
 }
