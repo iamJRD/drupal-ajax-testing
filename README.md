@@ -28,7 +28,7 @@ If you have any issues, questions, ideas, or concerns contact me through GitHub.
 
 ## Technologies Used
 - GIT
-- Drupal
+- Drupal 7
 - PHP
 - Drush
 
