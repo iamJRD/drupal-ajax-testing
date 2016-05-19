@@ -21,16 +21,16 @@ class DnaGeneratorTestCase extends DrupalUnitTestCase
 		// ACT
 		$result = create_second_strand_half($input);
 		// ASSERT
-		$this->assertTrue($result, $description);
+		$this->assertEqual($result, "T", $description);
 
 		// ENGLISH DESCRIPTION
 		$description = t('"AC" returns "TG".');
 		// ARRANGE
-		$input = "Av";
+		$input = "AC";
 		// ACT
 		$result = create_second_strand_half($input);
 		// ASSERT
-		$this->assertTrue($result, $description);
+		$this->assertEqual($result, "TG", $description);
 
 		// ENGLISH DESCRIPTION
 		$description = t('"ACGT" returns "TGCA".');
@@ -39,7 +39,7 @@ class DnaGeneratorTestCase extends DrupalUnitTestCase
 		// ACT
 		$result = create_second_strand_half($input);
 		// ASSERT
-		$this->assertTrue($result, $description);
+		$this->assertEqual($result, "TGCA", $description);
 	}
 }
 
@@ -80,3 +80,7 @@ class DnaGeneratorTests extends DrupalWebTestcase
 		$this->assertText('AAAAA', t('Right-o!'));
 	}
 }
+
+
+
+// ADD ONE FOR VALIDATION!
