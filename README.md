@@ -21,7 +21,7 @@ You will need the following things properly installed on your computer.
 - admin password: `ajax`
 
 ## Known Bugs
-There are currently no known bugs.
+**The database is currently correupted.**
 
 ## Support and contact details
 If you have any issues, questions, ideas, or concerns contact me through GitHub. If you would like to make a contribution to the code, feel free to do so and notify me by e-mail.
